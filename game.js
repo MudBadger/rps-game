@@ -6,20 +6,20 @@ function computerPlay(arr){
 
 function playRound(playerSelection, computerSelection){
     if((playerSelection === moveArray[0] && computerSelection === moveArray[2]) || (playerSelection === moveArray[1] && computerSelection === moveArray[0]) || (playerSelection === moveArray[2] && computerSelection === moveArray[1])){
-        console.log('You win');
-        alert("player - " + playerSelection + "\ncomputer - " + computerSelection + "\nYOU WIN!")
+        console.log("You win! " + playerSelection + " beats " + computerSelection);
+        alert("You win! " + playerSelection + " beats " + computerSelection);
     } else if(playerSelection === computerSelection){
         console.log("It's a tie!");
-        alert("player - " + playerSelection + "\ncomputer - " + computerSelection + "\nIT'S A TIE!")
-
+        alert(playerSelection + " VS " + computerSelection + "! It's a tie!")
     } else {
-        console.log("You lose!");
-        alert("player - " + playerSelection + "\ncomputer - " + computerSelection + "\nYOU LOSE!")
+        console.log("You lose! " + computerSelection + " beats " + playerSelection);
+        alert("You lose! " + computerSelection + " beats " + playerSelection);
     }
 }
 const moveArray = ['rock', 'paper', 'scissors'];
 
-const playerSelection = prompt('Rock, paper or scissors? :');
+const playerMove = prompt('Rock, paper or scissors? :');
+const playerSelection = playerMove.toLowerCase();
 const computerSelection = computerPlay(moveArray);
 console.log(playRound(playerSelection, computerSelection));
 console.log("player : " +playerSelection);
