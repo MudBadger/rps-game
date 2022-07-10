@@ -21,7 +21,7 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
-    for(i=1; i<=5; i++){
+    for(let i=1; i<=5; i++){
         const playerMove = prompt('Rock, paper or scissors? :')
         const playerSelection = playerMove.toLowerCase();
         const computerSelection = computerPlay(moveArray);
@@ -31,6 +31,7 @@ function game(){
     }
     return;
 }
+
 
 const moveArray = ['rock', 'paper', 'scissors'];
 console.log(game());
