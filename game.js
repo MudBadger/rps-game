@@ -24,7 +24,8 @@ function playRound(playerSelection, computerSelection){
 }
 
 function winner(){
-    if((youWin < tie && computerWin < tie) || youWin === computerWin){
+    if((youWin < tie && computerWin < tie && youWin && youWin === computerWin)
+            || youWin === computerWin){
         alert('It\'s a Tie! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
     } else if (youWin > computerWin){
         alert('You win! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
