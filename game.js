@@ -5,33 +5,52 @@ function computerPlay(arr){
     return computerMove;
 }
 
+
 function playRound(playerSelection, computerSelection){
 
     if((playerSelection === moveArray[0] && computerSelection === moveArray[2]) || (playerSelection === moveArray[1] && computerSelection === moveArray[0]) || (playerSelection === moveArray[2] && computerSelection === moveArray[1])){
-        console.log("You win! " + playerSelection + " beats " + computerSelection);
         alert("You win! " + playerSelection + " beats " + computerSelection);
+        youWin++;
     } else if(playerSelection === computerSelection){
-        console.log("It's a tie!");
-        alert(playerSelection + " VS " + computerSelection + "! It's a tie!")
+        alert(playerSelection + " VS " + computerSelection + "! It's a tie!");
+        tie++;
     } else {
-        console.log("You lose! " + computerSelection + " beats " + playerSelection);
         alert("You lose! " + computerSelection + " beats " + playerSelection);
+        computerWin++;
     }
     return;
+}
+
+function winner(){
+    if(youWin < tie && computerWin < tie || youWin === computerWin){
+        alert('It\'s a Tie! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
+    } else if (youWin > computerWin){
+        alert('You win! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
+    } else {
+        alert('You lose! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
+    }
+    return;
+}
+
+function playerPrompt(){
+    const playerChoice = prompt('Rock, paper or scissors? :');
+    const playerMove= playerChoice.toLowerCase();
+    return playerMove;
 }
 
 function game(){
     for(let i=1; i<=5; i++){
-        const playerMove = prompt('Rock, paper or scissors? :')
-        const playerSelection = playerMove.toLowerCase();
+        const playerSelection= playerPrompt();
         const computerSelection = computerPlay(moveArray);
-        console.log(playRound(playerSelection,computerSelection))
-        console.log("player : " +playerSelection);
-        console.log("computer : " +computerSelection);
+        console.log(playRound(playerSelection,computerSelection));
     }
+    console.log(winner());
     return;
 }
 
-
+let youWin = 0;
+let computerWin = 0;
+let tie = 0;
 const moveArray = ['rock', 'paper', 'scissors'];
 console.log(game());
+
