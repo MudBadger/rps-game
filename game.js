@@ -6,26 +6,22 @@ function playRound(playerChoice, computerChoice) {
     };
 
     if (playerChoice === computerChoice) {
-        alert(`${playerChoice} VS ${computerChoice}! It's a tie! Play again!`);
+        scoreContainer.textContent = `${playerChoice} VS ${computerChoice}! It's a tie! Play again!`;
         tie++;
     } else if (winningMoves[playerChoice] === computerChoice) {
-        alert(`You win! ${playerChoice} beats ${computerChoice}`);
+        scoreContainer.textContent = `You win! ${playerChoice} beats ${computerChoice}`;
         youWin++;
     } else {
-        alert(`You lose! ${computerChoice} beats ${playerChoice}`);
+        scoreContainer.textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
         computerWin++;
     }
 }
 
 function winner() {
     if (youWin > computerWin) {
-        alert(
-            `You win! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`
-        );
+        scoreContainer.textContent = `You win! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`;
     } else {
-        alert(
-            `You loose! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`
-        );
+        scoreContainer.textContent = `You loose! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`;
     }
 }
 
@@ -33,7 +29,7 @@ function game() {
     if (!playerChoice) return;
     const computerChoice =
         choicesArray[Math.floor(Math.random() * choicesArray.length)];
-    console.log(playRound(playerChoice, computerChoice));
+    playRound(playerChoice, computerChoice);
 }
 
 const choiceContainer = document.querySelector("#choice-container");
@@ -51,19 +47,34 @@ choiceContainer.addEventListener("click", (event) => {
             playerChoice = "paper";
             break;
     }
-    choiceArray.push(playerChoice);
-    console.log(choiceArray.length);
-    if (choiceArray.length === 6) {
-        console.log(winner());
+    playerChoiceArray.push(playerChoice);
+    if (playerChoiceArray.length === 6) {
+        winner();
+        restartBtn.style.display = "block";
+        choiceContainer.style.display = "none";
     } else {
-        console.log(game());
+        game();
     }
 });
+const restartBtn = document.querySelector("#restart");
+restartBtn.addEventListener("click", (event) => {
+    playerChoiceArray = [];
+    youWin = 0;
+    tie = 0;
+    computerWin = 0;
+    restartBtn.style.display = "none";
+    choiceContainer.style.display = "block";
+});
+
+const scoreContainer = document.querySelector("#score-container");
+
+restartBtn.style.display = "none";
+choiceContainer.style.display = "block";
 
 let youWin = 0,
     tie = 0,
     computerWin = 0;
 let playerChoice = "";
-let choiceArray = [];
+let playerChoiceArray = [];
 
 const choicesArray = ["rock", "paper", "scissors"];
