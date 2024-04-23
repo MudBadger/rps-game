@@ -1,56 +1,46 @@
+function playRound(playerChoice, computerChoice) {
+    const winningMoves = {
+        rock: "scissors",
+        paper: "rock",
+        scissors: "paper",
+    };
 
-function computerPlay(arr){
-    const randomMove = Math.floor(Math.random() * arr.length);
-    const computerMove = arr[randomMove];
-    return computerMove;
-}
-
-
-function playRound(playerSelection, computerSelection){
-
-    if((playerSelection === moveArray[0] && computerSelection === moveArray[2])
-             || (playerSelection === moveArray[1] && computerSelection === moveArray[0])
-              || (playerSelection === moveArray[2] && computerSelection === moveArray[1])){
-        alert("You win! " + playerSelection + " beats " + computerSelection);
-        youWin++;
-    } else if(playerSelection === computerSelection){
-        alert(playerSelection + " VS " + computerSelection + "! It's a tie! Play again!");
+    if (playerChoice === computerChoice) {
+        alert(`${playerChoice} VS ${computerChoice}! It's a tie! Play again!`);
         tie++;
+    } else if (winningMoves[playerChoice] === computerChoice) {
+        alert(`You win! ${playerChoice} beats ${computerChoice}`);
+        youWin++;
     } else {
-        alert("You lose! " + computerSelection + " beats " + playerSelection);
+        alert(`You lose! ${computerChoice} beats ${playerChoice}`);
         computerWin++;
     }
-    return;
 }
 
-function winner(){
-     if (youWin > computerWin){
-        alert('You win! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
+function winner() {
+    if (youWin > computerWin) {
+        alert(
+            `You win! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`
+        );
     } else {
-        alert('You lose! Player :' + youWin + ' Computer :' + computerWin + ' Tie :' + tie);
+        alert(
+            `You loose! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`
+        );
     }
-    return;
 }
 
-function playerPrompt(){
-    const playerChoice = prompt('Rock, paper or scissors? :');
-    const playerMove= playerChoice.toLowerCase();
-    return playerMove;
-}
-
-function game(){
-    for(let i=0; (youWin + computerWin) < 5; i++){
-        const playerSelection= playerPrompt();
-        const computerSelection = computerPlay(moveArray);
-        console.log(playRound(playerSelection,computerSelection));
+function game() {
+    for (let i = 0; i <= 5; i++) {
+        const playerChoice = prompt("Rock, paper or scissors? :").toLowerCase();
+        const computerChoice =
+            choicesArray[Math.floor(Math.random() * choicesArray.length)];
+        console.log(playRound(playerChoice, computerChoice));
     }
     console.log(winner());
-    return;
 }
 
-let youWin = 0;
-let computerWin = 0;
-let tie = 0;
-const moveArray = ['rock', 'paper', 'scissors'];
+let youWin = 0,
+    tie = 0,
+    computerWin = 0;
+const choicesArray = ["rock", "paper", "scissors"];
 console.log(game());
-
