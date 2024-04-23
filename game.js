@@ -28,10 +28,16 @@ function winner() {
 }
 
 function game() {
-    if (!playerChoice) return;
-    const computerChoice =
-        choicesArray[Math.floor(Math.random() * choicesArray.length)];
-    playRound(playerChoice, computerChoice);
+    playerChoiceArray.push(playerChoice);
+    if (playerChoiceArray.length === 6) {
+        winner();
+        restartBtn.style.display = "block";
+        choiceContainer.style.display = "none";
+    } else {
+        const computerChoice =
+            choicesArray[Math.floor(Math.random() * choicesArray.length)];
+        playRound(playerChoice, computerChoice);
+    }
 }
 
 const choiceContainer = document.querySelector("#choice-container");
@@ -49,14 +55,7 @@ choiceContainer.addEventListener("click", (event) => {
             playerChoice = "paper";
             break;
     }
-    playerChoiceArray.push(playerChoice);
-    if (playerChoiceArray.length === 6) {
-        winner();
-        restartBtn.style.display = "block";
-        choiceContainer.style.display = "none";
-    } else {
-        game();
-    }
+    game();
 });
 const restartBtn = document.querySelector("#restart");
 restartBtn.addEventListener("click", (event) => {
