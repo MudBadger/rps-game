@@ -20,8 +20,10 @@ function playRound(playerChoice, computerChoice) {
 function winner() {
     if (youWin > computerWin) {
         scoreContainer.textContent = `You win! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`;
-    } else {
+    } else if (youWin < computerWin) {
         scoreContainer.textContent = `You loose! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`;
+    } else {
+        scoreContainer.textContent = `It's a tie! Player : ${youWin} Computer : ${computerWin} Tie : ${tie}`;
     }
 }
 
